@@ -23,8 +23,8 @@ ls
 echo "Looking at what you got.."
 cd $4
 ls
-rsync -avz -e "ssh -l $1 -i $2" --exclude 'node_modules' --exclude '.env' --exclude 'dist/*' $(pwd)  $1@$3:/home/angular/build
+rsync -avz -e "ssh -l $1 -i $2" --exclude 'node_modules' --exclude '.env' --exclude 'dist/*' $(pwd)  $1@$3:/home/$1/build
 ssh $1@$3 -i $2 "cd build;cd $4; npm i;npx ng build --prod"
 mkdir dist
-rsync -avz -e "ssh -l $1 -i $2" $1@$3:/home/angular/build/$4/dist/$4 $(pwd)/dist
+rsync -avz -e "ssh -l $1 -i $2" $1@$3:/home/$1/build/$4/dist/$4 $(pwd)/dist
 echo "Done! I built your angular project and it's located here: $(pwd)/dist/$4"
